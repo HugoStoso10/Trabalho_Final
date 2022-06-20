@@ -31,12 +31,23 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     data = DateEntry(window2,width=25)
     data.place(x=237, y=175)
     tk.Label(window2, text="Palavra-passe:", font=("", 15)).place(x=50, y=210)
-    password = tk.Entry(window2, width=25, show="*")
+    pass_str = tk.StringVar()
+    password = tk.Entry(window2, width=25, show="*", textvariable=pass_str)
     password.place(x=186, y=216)
     tk.Label(window2, text="Confirme a palavra-passe:", font=("", 15)).place(x=50, y=250)
-    confirmpass = tk.Entry(window2, width=25, show="*")
+    confirmpass = tk.Entry(window2, width=25, show="*", textvariable=pass_str)
     confirmpass.place(x=287, y=256)
-    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=290)
+    a = tk.IntVar(value=0)
+    #Função do checkbutton mostrarpass
+    def mostarpass():
+        if (a.get()==1):
+            password.config(show='') and confirmpass.config(show='')
+        else:
+            password.config(show='*') and confirmpass.config(show='*')
+
+    mostarpass = tk.Checkbutton(window2, text="Mostrar palavra-passe", variable=a, onvalue=1, offvalue=0, command=mostarpass)
+    mostarpass.place(x=50, y=290)
+    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=320)
     #INSERT DE FOTO DO ROSTO
     erro = tk.Label(window2, text="", fg="red", font=("", 15)) #Label para expor algum tipo de erro
     erro.place(x=50, y=360)

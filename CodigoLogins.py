@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkcalendar import DateEntry #pip install tkcalendar <- para instalar a biblioteca
-#from Base_dados import conexao_sql
+from Base_dados import conexao_sql
 
 #Janela de register
 def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, password, confirmpass, erro
@@ -28,9 +28,13 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     tk.Label(window2, text="User:", font=("", 15)).place(x=50, y=140)
     nickname = tk.Entry(window2, width=25)
     nickname.place(x=102, y=147)
+    nickerro = tk.Label(window2, text="", font=("", 9), fg="red")
+    nickerro.place(x=50, y=170)
     tk.Label(window2, text="Email:", font=("", 15)).place(x=50, y=200)
     email = tk.Entry(window2, width=35)
     email.place(x=107, y=205)
+    emailerro = tk.Label(window2, text="", font=("", 9), fg="red")
+    emailerro.place(x=50, y=230)
     tk.Label(window2, text="Data de nascimento:", font=("", 15)).place(x=50, y=250)
     data = DateEntry(window2,width=25)
     data.place(x=237, y=255)
@@ -39,9 +43,13 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     confirm = tk.StringVar()
     password = tk.Entry(window2, width=25, show="*", textvariable=pass_str)
     password.place(x=186, y=286)
+    passerro = tk.Label(window2, text="", font=("", 9), fg="red")
+    passerro.place(x=50, y=310)
     tk.Label(window2, text="Confirme:", font=("", 15)).place(x=350, y=280)
     confirmpass = tk.Entry(window2, width=25, show="*", textvariable=confirm)
     confirmpass.place(x=439, y=286)
+    passconferro = tk.Label(window2, text="", font=("", 9), fg="red")
+    passconferro.place(x=350, y=310)
     a = tk.IntVar(value=0)
     #Função do checkbutton mostrarpass
     def mostarpass():
@@ -53,48 +61,59 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
             confirmpass.config(show='*')
 
     mostarpass = tk.Checkbutton(window2, text="Mostrar palavra-passe", variable=a, onvalue=1, offvalue=0, command=mostarpass)
-    mostarpass.place(x=50, y=310)
-    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=340)
+    mostarpass.place(x=50, y=330)
+    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=350)
     #INSERT DE FOTO DO ROSTO
 
     # Inserir valores na base dados e sistema de erro de register
     def Inserir_BD(): #rever isto sff
         a, b, c, d, e, f = len(nome.get()), len(apelido.get()), len(nickname.get()), len(email.get()), len(password.get()), len(confirmpass.get())
 
-
-        if a==0:
+         # Erro1 - nome não foi inserido
+        if a == 0:
             nomeerro.config(text="O nome não foi inserido")
         else:
             nomeerro.config(text="")
-
-        if b==0:
+        # Erro2 - apelido não foi inserido
+        if b == 0:
             apelidoerro.config(text="O apelido não foi inserido")
         else:
             apelidoerro.config(text="")
+        # Erro3 - username não foi inserido
+        if c == 0:
+            nickerro.config(text="O username não foi inserido")
+        else:
+            nickerro.config(text="")
+        # Erro4 - email não foi inserido
+        if d == 0:
+            emailerro.config(text="O email não foi inserido")
+        else:
+            emailerro.config(text="")
+        # Erro5 - password não foi inserido
+        if e == 0:
+            passerro.config(text="A palavra-passe não foi inserida")
+        else:
+            passerro.config(text="")
+        # Erro6 - confirmar password não foi inserido
+        if f == 0:
+            passconferro.config(text="A confirmação de palavra-passe não foi inserida")
+        else:
+            passconferro.config(text="")
+        # Erro7 - password e confirmar password são diferentes
 
-        #elif c==0:
-            #print("Erro 3")
-        #elif d==0:
-            #print("Erro 4")
-        #elif e==0:
-            #print("Erro 5")
-        #elif f==0:
-            #print("Erro 6")
-        #else:
-            #pass
+        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0):
+            try:
+                #print(nome.get())
+                cursor = conexao_sql()
+                comando = f'''INSERT INTO users(nome, apelido, nickname, email,password,data)
+                    VALUES ('{nome.get()}','{apelido.get()}','{nickname.get()}','{email.get()}','{password.get()}','{data.get()}')'''
+                cursor.execute(comando)
+                cursor.commit()
+            except:  # pois o campo nickname na base dados é unico
+                nickerro.config(text='nickname já utilizado')
 
-        #try:
-            # print(nome.get())
-            #cursor = conexao_sql()
-            #comando = f'''INSERT INTO users(nome, apelido, nickname, email,password,data)
-                        #VALUES ('{nome.get()}','{apelido.get()}','{nickname.get()}','{email.get()}','{password.get()}','{data.get()}')'''
-            #cursor.execute(comando)
-            #cursor.commit()
-        #except:  # pois o campo nickname na base dados é unico
-            #print('nickname já utilizado')
-
-    tk.Button(window2, text="Criar conta", font=("", 15),command=Inserir_BD).place(x=330, y=400)
-    tk.Button(window2, text="iniciar sessão em alternativa", font=("", 15), command=login2).place(x=250, y=440)
+    tk.Button(window2, text="Criar conta", font=("", 15),command=Inserir_BD).place(x=330, y=440)
+    tk.Button(window2, text="iniciar sessão em alternativa", font=("", 15), command=login2).place(x=250, y=480)
     window2.mainloop()
 
 #Funcionalidade do botão de criar conta

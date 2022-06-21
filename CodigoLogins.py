@@ -18,26 +18,27 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     tk.Label(window2, text="Nome:", font=("", 15)).place(x=50, y=90)
     nome = tk.Entry(window2, width=25)
     nome.place(x=112, y=97)
+    erronome = tk.Label(window2, text="", font=("", 9), fg="red").place(x=50, y=120)
     tk.Label(window2, text="Apelido:", font=("", 15)).place(x=350, y=90)
     apelido = tk.Entry(window2, width=25)
     apelido.place(x=425, y=97)
-    tk.Label(window2, text="User:", font=("", 15)).place(x=50, y=130)
+    tk.Label(window2, text="User:", font=("", 15)).place(x=50, y=140)
     nickname = tk.Entry(window2, width=25)
-    nickname.place(x=102, y=137)
-    tk.Label(window2, text="Email:", font=("", 15)).place(x=50, y=170)
+    nickname.place(x=102, y=147)
+    tk.Label(window2, text="Email:", font=("", 15)).place(x=50, y=200)
     email = tk.Entry(window2, width=35)
-    email.place(x=107, y=175)
-    tk.Label(window2, text="Data de nascimento:", font=("", 15)).place(x=50, y=210)
+    email.place(x=107, y=205)
+    tk.Label(window2, text="Data de nascimento:", font=("", 15)).place(x=50, y=250)
     data = DateEntry(window2,width=25)
-    data.place(x=237, y=215)
-    tk.Label(window2, text="Palavra-passe:", font=("", 15)).place(x=50, y=250)
+    data.place(x=237, y=255)
+    tk.Label(window2, text="Palavra-passe:", font=("", 15)).place(x=50, y=280)
     pass_str = tk.StringVar()
     confirm = tk.StringVar()
     password = tk.Entry(window2, width=25, show="*", textvariable=pass_str)
-    password.place(x=186, y=256)
-    tk.Label(window2, text="Confirme:", font=("", 15)).place(x=350, y=250)
+    password.place(x=186, y=286)
+    tk.Label(window2, text="Confirme:", font=("", 15)).place(x=350, y=280)
     confirmpass = tk.Entry(window2, width=25, show="*", textvariable=confirm)
-    confirmpass.place(x=439, y=256)
+    confirmpass.place(x=439, y=286)
     a = tk.IntVar(value=0)
     #Função do checkbutton mostrarpass
     def mostarpass():
@@ -49,20 +50,13 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
             confirmpass.config(show='*')
 
     mostarpass = tk.Checkbutton(window2, text="Mostrar palavra-passe", variable=a, onvalue=1, offvalue=0, command=mostarpass)
-    mostarpass.place(x=50, y=290)
-    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=320)
+    mostarpass.place(x=50, y=310)
+    tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=340)
     #INSERT DE FOTO DO ROSTO
-    erro = tk.Label(window2, text="", fg="red", font=("", 15)) #Label para expor algum tipo de erro
-    erro.place(x=50, y=360)
 
     # Inserir valores na base dados e sistema de erro de register
     def Inserir_BD():
-        a = len(nome.get())
-        b = len(apelido.get())
-        c = len(nickname.get())
-        d = len(email.get())
-        e = len(password.get())
-        f = len(confirmpass.get())
+        a, b, c, d, e, f = len(nome.get()), len(apelido.get()), len(nickname.get()), len(email.get()), len(password.get()), len(confirmpass.get())
         if a==0:
             print("Erro 1")
         elif b==0:
@@ -77,7 +71,6 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
             print("Erro 6")
         else:
             pass
-
 
         # print(nome.get())
         #cursor = conexao_sql()

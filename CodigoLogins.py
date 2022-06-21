@@ -18,10 +18,13 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     tk.Label(window2, text="Nome:", font=("", 15)).place(x=50, y=90)
     nome = tk.Entry(window2, width=25)
     nome.place(x=112, y=97)
-    erronome = tk.Label(window2, text="", font=("", 9), fg="red").place(x=50, y=120)
+    nomeerro = tk.Label(window2, text="", font=("", 9), fg="red")
+    nomeerro.place(x=50, y=120)
     tk.Label(window2, text="Apelido:", font=("", 15)).place(x=350, y=90)
     apelido = tk.Entry(window2, width=25)
     apelido.place(x=425, y=97)
+    apelidoerro = tk.Label(window2, text="", font=("", 9), fg="red")
+    apelidoerro.place(x=350, y=120)
     tk.Label(window2, text="User:", font=("", 15)).place(x=50, y=140)
     nickname = tk.Entry(window2, width=25)
     nickname.place(x=102, y=147)
@@ -55,29 +58,40 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     #INSERT DE FOTO DO ROSTO
 
     # Inserir valores na base dados e sistema de erro de register
-    def Inserir_BD():
+    def Inserir_BD(): #rever isto sff
         a, b, c, d, e, f = len(nome.get()), len(apelido.get()), len(nickname.get()), len(email.get()), len(password.get()), len(confirmpass.get())
-        if a==0:
-            print("Erro 1")
-        elif b==0:
-            print("Erro 2")
-        elif c==0:
-            print("Erro 3")
-        elif d==0:
-            print("Erro 4")
-        elif e==0:
-            print("Erro 5")
-        elif f==0:
-            print("Erro 6")
-        else:
-            pass
 
-        # print(nome.get())
-        #cursor = conexao_sql()
-        #comando = f'''INSERT INTO users(nome, apelido, nickname, email,password,data)
-            #VALUES ('{nome.get()}','{apelido.get()}','{nickname.get()}','{email.get()}','{password.get()}','{data.get()}')'''
-        #cursor.execute(comando)
-        #cursor.commit()
+
+        if a==0:
+            nomeerro.config(text="O nome não foi inserido")
+        else:
+            nomeerro.config(text="")
+
+        if b==0:
+            apelidoerro.config(text="O apelido não foi inserido")
+        else:
+            apelidoerro.config(text="")
+
+        #elif c==0:
+            #print("Erro 3")
+        #elif d==0:
+            #print("Erro 4")
+        #elif e==0:
+            #print("Erro 5")
+        #elif f==0:
+            #print("Erro 6")
+        #else:
+            #pass
+
+        #try:
+            # print(nome.get())
+            #cursor = conexao_sql()
+            #comando = f'''INSERT INTO users(nome, apelido, nickname, email,password,data)
+                        #VALUES ('{nome.get()}','{apelido.get()}','{nickname.get()}','{email.get()}','{password.get()}','{data.get()}')'''
+            #cursor.execute(comando)
+            #cursor.commit()
+        #except:  # pois o campo nickname na base dados é unico
+            #print('nickname já utilizado')
 
     tk.Button(window2, text="Criar conta", font=("", 15),command=Inserir_BD).place(x=330, y=400)
     tk.Button(window2, text="iniciar sessão em alternativa", font=("", 15), command=login2).place(x=250, y=440)

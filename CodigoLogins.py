@@ -64,7 +64,8 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
     mostarpass.place(x=50, y=330)
     tk.Label(window2, text="Insire uma do seu rosto (Opcional):", font=("", 15)).place(x=50, y=350)
     #INSERT DE FOTO DO ROSTO
-
+    confirmpasserro = tk.Label(window2, text="", font=("", 9), fg="red")
+    confirmpasserro.place(x=50, y=310)
     # Inserir valores na base dados e sistema de erro de register
     def Inserir_BD(): #rever isto sff
         a, b, c, d, e, f = len(nome.get()), len(apelido.get()), len(nickname.get()), len(email.get()), len(password.get()), len(confirmpass.get())
@@ -100,8 +101,12 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
         else:
             passconferro.config(text="")
         # Erro7 - password e confirmar password são diferentes
+        if password != confirmpass:
+            confirmpasserro.config(text="A palavra-passe não é igual")
+        else:
+            confirmpasserro.config(text="")
 
-        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0):
+        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0) and(password==confirmpasserro):
             try:
                 #print(nome.get())
                 cursor = conexao_sql()

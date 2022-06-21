@@ -101,12 +101,13 @@ def ecra3(): #variaveis das Entrys: nome, apelido, nickname, email, data, passwo
         else:
             passconferro.config(text="")
         # Erro7 - password e confirmar password são diferentes
-        if password != confirmpass:
-            confirmpasserro.config(text="A palavra-passe não é igual")
-        else:
-            confirmpasserro.config(text="")
+        if (e!=0) and (f!=0):
+            if password != confirmpass:
+                confirmpasserro.config(text="A palavra-passe não é igual")
+            else:
+                confirmpasserro.config(text="")
 
-        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0) and(password==confirmpasserro):
+        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0) and (password == confirmpass):
             try:
                 #print(nome.get())
                 cursor = conexao_sql()

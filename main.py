@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkcalendar import DateEntry #pip install tkcalendar <- para instalar a biblioteca
 from Base_dados import conexao_sql
-
+from PIL import ImageTk, Image
 
 #------------------------------JANELA REGISTER------------------------------------------------------
 #Janela de register
@@ -110,7 +110,7 @@ def register(): #variaveis das Entrys: nome, apelido, nickname, email, data, pas
             else:
                 confirmpasserro.config(text="")
 
-        if (a!=0,) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0) and (password.get() == confirmpass.get()):
+        if (a!=0) and (b!=0) and (c!=0) and (d!=0) and (e!=0) and (f!=0) and (password.get() == confirmpass.get()):
             try:
                 print(nome.get())
                 cursor = conexao_sql()
@@ -133,17 +133,53 @@ def ecra2():
     window3.geometry("800x600")
     window3.resizable(0,0)
     window3.title("Iniciar sessão")
-
     # funcionalidade do botão de criar sessão: Fecha janela de login e abre janela de criar conta
     def criarconta2():
         window3.destroy()
         register()
-    # funcionalidade do botão login: Fecha a janela de login e abre a janela de menu de jogos
-    def menujogos2():
-        window3.destroy()
-        menujogos()
+    tk.Label(window3, text="User:", font=(" ", 15)).place(x=50, y=120)
+    nickname = tk.Entry(window3, width=25)
+    nickname.place(x=112, y=127)
+    erronick = tk.Label(window3, text="", font=("", 9), fg="red")
+    erronick.place(x=50, y=170)
+    tk.Label(window3, text="Palavra-passe:", font=("", 15)).place(x=50, y=280)
+    pass_str = tk.StringVar()
+    password = tk.Entry(window3, width=25, show="*")
+    password.place(x=186, y=286)
+    erropass = tk.Label(window3, text="", font=("", 9), fg="red")
+    erropass.place(x=50, y=310)
+    confirmpasserro = tk.Label(window3, text="", font=("", 9), fg="red")
+    confirmpasserro.place(x=50, y=310)
+    criadosucesso = tk.Label(window3, text="", font=("", 9), fg="green")
+    criadosucesso.place(x=220, y=410)
+    semsucesso = tk.Label(window3, text='', font=('',9), fg='red')
+    semsucesso.place(x=220, y=410)
 
-    tk.Button(window3, text="login", font=("", 15), command=menujogos2).place(x=20, y=400)
+    def Consultar_BD():
+        a, b = len(nickname.get()), len(password.get())
+        # Erro1 - username não foi inserido
+        if a == 0:
+            erronick.config(text="O nome de utilizador não foi inserido")
+        else:
+            erronick.config(text="")
+        # Erro2 - password não foi inserido
+        if b == 0:
+            erropass.config(text="A palavra-passe não foi inserida")
+        else:
+            erropass.config(text="")
+
+        #if (a!=0) and (b!=0):
+            #cursor = conexao_sql()
+            #comando = '''SELECT nickname,password FROM users  WHERE nickname=? AND password=?''',(nickname,password)
+            #cursor.execute(comando)
+            #resultado=cursor.fetchall()
+            #if resultado:
+                #window3.destroy()
+                #menujogos()
+             #else:
+                #semsucesso.config(text='User ou Password nao correspondem')
+            #criadosucesso.config(text='Conta criada com Sucesso. Clique em login para iniciar sessão')
+    tk.Button(window3, text="login", font=("", 15), command=Consultar_BD).place(x=20, y=400)
     tk.Button(window3, text="criar conta", font=("", 15), command=criarconta2).place(x=90, y=400)
     window3.mainloop()
 

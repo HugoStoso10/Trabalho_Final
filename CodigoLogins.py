@@ -188,10 +188,10 @@ def janela_jogocobra():
     tk.Label(window5, text="Right Arrow - mover para a direita", font=("", 15)).place(x=560, y=310)
     tk.Label(window5, text="Objetivo:", font=("",15)).place(x=560, y=370)
     tk.Label(window5, text="Com a cobra comer o máximo de número de maçãs, sem tocar nas bordas\n do mapa e nem em sim própria.\n Quantas mais maçãs forem comidas, maior é a pontuação.\n Bom Jogo!", font=("", 15)).place(x=560, y=400)
+    #Função do jogo da cobra
     def jogo():
         from jogo_cobra import jogar
         jogar()
-
     tk.Button(window5, text="Iniciar", font=("", 15), command=jogo). place(x=870, y=600)
     window5.mainloop()
 

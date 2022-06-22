@@ -2,6 +2,7 @@ import tkinter as tk
 from tkcalendar import DateEntry #pip install tkcalendar <- para instalar a biblioteca
 from Base_dados import conexao_sql
 
+
 #------------------------------JANELA REGISTER------------------------------------------------------
 #Janela de register
 def register(): #variaveis das Entrys: nome, apelido, nickname, email, data, password, confirmpass, erro
@@ -137,7 +138,12 @@ def ecra2():
     def criarconta2():
         window3.destroy()
         register()
+    # funcionalidade do botão login: Fecha a janela de login e abre a janela de menu de jogos
+    def menujogos2():
+        window3.destroy()
+        menujogos()
 
+    tk.Button(window3, text="login", font=("", 15), command=menujogos2).place(x=20, y=400)
     tk.Button(window3, text="criar conta", font=("", 15), command=criarconta2).place(x=90, y=400)
     window3.mainloop()
 
@@ -146,38 +152,52 @@ def ecra2():
 def menujogos():
     window4 = tk.Tk()
     window4.geometry("1280x720")
+    window4.resizable(0, 0)
+    window4.title("Menu de jogos")
+
+    # funcionalidade do botão: fecha janela do menu e abre a janela do jogo da cobra
+    def jogocobra():
+        window4.destroy()
+        janela_jogocobra()
+
     #Fazer uma scrollbar
     tk.Label(window4, text="Menu de Jogos", font=("", 20)).place(x=540, y=30)
-    jogocobra = tk.Button(window4)
-    jogocobra.place(x=90, y=90)
-    tk.Label(window4, text="Jogo da Cobra", font=("", 15)).place(x=90, y=120)
-    window4.resizable(0, 0)
+    frame1 = tk.LabelFrame(window4)
+    frame1.place(x=90, y=90)
+    tk.Button(window4, text=("Jogo da Cobra"), font=("", 12),command=jogocobra, width=55, height=15).place(x=90, y=90)
+    frame2 = tk.LabelFrame(window4)
+    frame2.place(x=650, y=90)
+    tk.Button(frame2, text=("Em breve..."), font=("", 12), width=55, height=15).pack()
     window4.mainloop()
 
-#------------------------------JANELA MENU DE JOGOS------------------------------------------------------
-#janela espe
+#------------------------------JANELA JOGO DA COBRA------------------------------------------------------
+#janela especifica para o jogo da cobra
+def janela_jogocobra():
+    window5 = tk.Tk()
+    window5.geometry("1280x720")
+    window5.resizable(0, 0)
+    window5.title("Jogo da Cobra")
+    frame1 = tk.LabelFrame(window5, width=100, height= 100)
+    frame1.place(x=50, y=70)
+    window5.mainloop()
+
 #------------------------------JANELA BOAS VINDAS------------------------------------------------------
+#janela de boas vindas
+window = tk.Tk()
+window.geometry("800x600")
+window.resizable(0,0) #impede a alteração do tamanho da janela
 #Funcionalidade do botão de criar conta: Fecha a janela de boas vindas e abre a janela de criar conta
 def register2():
     window.destroy()
     register()
-
 #Funcionalidade do botão iniciar sessão: Fecha janela de Boas vindas e abre janela de login
 def login():
     window.destroy()
     ecra2()
 
-#janela de boas vindas
-
-def boasvindas():
-    window = tk.Tk()
-    window.geometry("800x600")
-    window.resizable(0,0) #impede a alteração do tamanho da janela
-    window.title("Bem Vindo a app 'NomedaApp'") #Falta definir nome da App, caso seja para definir 1.
-    tk.Label(window, text="Bem vindo à App!", font=("", 20)).place(x=300,y=150) #texto de boas vindas
-    tk.Label(window, text="Deseja iniciar sessão ou criar uma nova conta?", font=("",20)).place(x=120,y=200)
-    tk.Button(window, text="Iniciar sessão", font=("",15), command=login).place(x=150,y=400)
-    tk.Button(window, text="Criar conta", font=("",15), command=register2).place(x=520,y=400)
-    window.mainloop()
-
-menujogos()
+window.title("Bem Vindo a app 'NomedaApp'") #Falta definir nome da App, caso seja para definir 1.
+tk.Label(window, text="Bem vindo à App!", font=("", 20)).place(x=300,y=150) #texto de boas vindas
+tk.Label(window, text="Deseja iniciar sessão ou criar uma nova conta?", font=("",20)).place(x=120,y=200)
+tk.Button(window, text="Iniciar sessão", font=("",15), command=login).place(x=150,y=400)
+tk.Button(window, text="Criar conta", font=("",15), command=register2).place(x=520,y=400)
+window.mainloop()

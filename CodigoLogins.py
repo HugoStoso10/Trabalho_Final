@@ -147,10 +147,10 @@ def menujogos():
     window4 = tk.Tk()
     window4.geometry("1280x720")
     #Fazer uma scrollbar
-    frame1= tk.LabelFrame(window4, text="", )
-    frame2 = tk.LabelFrame(window4, text="", bg="blue", padx=206, pady=103)
-    frame2.place(x=50, y=50)
-    tk.Button(frame2, text="teste").pack()
+    tk.Label(window4, text="Menu de Jogos", font=("", 20)).place(x=540, y=30)
+    jogocobra = tk.Button(window4)
+    jogocobra.place(x=90, y=90)
+    tk.Label(window4, text="Jogo da Cobra", font=("", 15)).place(x=90, y=120)
     window4.resizable(0, 0)
     window4.mainloop()
 #------------------------------JANELA BOAS VINDAS------------------------------------------------------

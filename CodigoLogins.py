@@ -154,16 +154,11 @@ def menujogos():
     window4.geometry("1280x720")
     window4.resizable(0, 0)
     window4.title("Menu de jogos")
-
     # funcionalidade do botão: fecha janela do menu e abre a janela do jogo da cobra
     def jogocobra():
         window4.destroy()
         janela_jogocobra()
-
-    #Fazer uma scrollbar
     tk.Label(window4, text="Menu de Jogos", font=("", 20)).place(x=540, y=30)
-    frame1 = tk.LabelFrame(window4)
-    frame1.place(x=90, y=90)
     tk.Button(window4, text=("Jogo da Cobra"), font=("", 12),command=jogocobra, width=55, height=15).place(x=90, y=90)
     frame2 = tk.LabelFrame(window4)
     frame2.place(x=650, y=90)
@@ -177,8 +172,27 @@ def janela_jogocobra():
     window5.geometry("1280x720")
     window5.resizable(0, 0)
     window5.title("Jogo da Cobra")
-    frame1 = tk.LabelFrame(window5, width=100, height= 100)
-    frame1.place(x=50, y=70)
+    # Funcionalidade do botão: fecha a janela do jogo da cobra e abre a janela menu
+    def menujogos2():
+        window5.destroy()
+        menujogos()
+    tk.Button(window5, text="Voltar", font=("", 15),command=menujogos2).place(x=50, y=30)
+    tk.Label(window5, text="Jogo da cobra", font=("", 20)).place(x=560, y=30)
+    leaderboard = tk.LabelFrame(window5, width=500, height=550)
+    leaderboard.place(x=50, y=120)
+    tk.Label(window5, text="Como jogar?", font=("", 15)).place(x=560, y=120)
+    tk.Label(window5, text="Movimentação:", font=("", 15)).place(x=560, y=160)
+    tk.Label(window5, text="Up Arrow - mover para cima", font=("", 15)).place(x=560, y=220)
+    tk.Label(window5, text="Down Arrow - mover para baixo", font=("", 15)).place(x=560, y=250)
+    tk.Label(window5, text="Left Arrow - mover para a esquerda", font=("", 15)).place(x=560, y=280)
+    tk.Label(window5, text="Right Arrow - mover para a direita", font=("", 15)).place(x=560, y=310)
+    tk.Label(window5, text="Objetivo:", font=("",15)).place(x=560, y=370)
+    tk.Label(window5, text="Com a cobra comer o máximo de número de maçãs, sem tocar nas bordas\n do mapa e nem em sim própria.\n Quantas mais maçãs forem comidas, maior é a pontuação.\n Bom Jogo!", font=("", 15)).place(x=560, y=400)
+    def jogo():
+        from jogo_cobra import jogar
+        jogar()
+
+    tk.Button(window5, text="Iniciar", font=("", 15), command=jogo). place(x=870, y=600)
     window5.mainloop()
 
 #------------------------------JANELA BOAS VINDAS------------------------------------------------------

@@ -70,7 +70,7 @@ def register(): #variaveis das Entrys: nome, apelido, nickname, email, data, pas
     criadosucesso = tk.Label(window2, text="", font=("", 9), fg="green")
     criadosucesso.place(x=220, y=410)
     # Inserir valores na base dados e sistema de erro de register
-    def Inserir_BD(): #rever isto sff
+    def Inserir_BD():
         a, b, c, d, e, f = len(nome.get()), len(apelido.get()), len(nickname.get()), len(email.get()), len(password.get()), len(confirmpass.get())
          # Erro1 - nome não foi inserido
         if a == 0:
@@ -145,7 +145,12 @@ def ecra2():
 #Janela de Menu de Jogos
 def menujogos():
     window4 = tk.Tk()
-    window4.geometry("800x600")
+    window4.geometry("1280x720")
+    #Fazer uma scrollbar
+    frame1= tk.LabelFrame(window4, text="", )
+    frame2 = tk.LabelFrame(window4, text="", bg="blue", padx=206, pady=103)
+    frame2.place(x=50, y=50)
+    tk.Button(frame2, text="teste").pack()
     window4.resizable(0, 0)
     window4.mainloop()
 #------------------------------JANELA BOAS VINDAS------------------------------------------------------
@@ -161,12 +166,15 @@ def login():
 
 #janela de boas vindas
 
-window = tk.Tk()
-window.geometry("800x600")
-window.resizable(0,0) #impede a alteração do tamanho da janela
-window.title("Bem Vindo a app 'NomedaApp'") #Falta definir nome da App, caso seja para definir 1.
-tk.Label(window, text="Bem vindo à App!", font=("", 20)).place(x=300,y=150) #texto de boas vindas
-tk.Label(window, text="Deseja iniciar sessão ou criar uma nova conta?", font=("",20)).place(x=120,y=200)
-tk.Button(window, text="Iniciar sessão", font=("",15), command=login).place(x=150,y=400)
-tk.Button(window, text="Criar conta", font=("",15), command=register2).place(x=520,y=400)
-window.mainloop()
+def boasvindas():
+    window = tk.Tk()
+    window.geometry("800x600")
+    window.resizable(0,0) #impede a alteração do tamanho da janela
+    window.title("Bem Vindo a app 'NomedaApp'") #Falta definir nome da App, caso seja para definir 1.
+    tk.Label(window, text="Bem vindo à App!", font=("", 20)).place(x=300,y=150) #texto de boas vindas
+    tk.Label(window, text="Deseja iniciar sessão ou criar uma nova conta?", font=("",20)).place(x=120,y=200)
+    tk.Button(window, text="Iniciar sessão", font=("",15), command=login).place(x=150,y=400)
+    tk.Button(window, text="Criar conta", font=("",15), command=register2).place(x=520,y=400)
+    window.mainloop()
+
+menujogos()

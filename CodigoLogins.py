@@ -153,6 +153,9 @@ def menujogos():
     tk.Label(window4, text="Jogo da Cobra", font=("", 15)).place(x=90, y=120)
     window4.resizable(0, 0)
     window4.mainloop()
+
+#------------------------------JANELA MENU DE JOGOS------------------------------------------------------
+#janela espe
 #------------------------------JANELA BOAS VINDAS------------------------------------------------------
 #Funcionalidade do botão de criar conta: Fecha a janela de boas vindas e abre a janela de criar conta
 def register2():

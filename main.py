@@ -127,7 +127,7 @@ def register(): #variaveis das Entrys: nome, apelido, nickname, email, data, pas
     window2.mainloop()
 
 #------------------------------JANELA LOGIN------------------------------------------------------
-#Janela de login (parte do Rui)
+#Janela de login
 def ecra2():
     window3 =tk.Tk()
     window3.geometry("800x600")
@@ -168,17 +168,17 @@ def ecra2():
         else:
             erropass.config(text="")
 
-        #if (a!=0) and (b!=0):
-            #cursor = conexao_sql()
-            #comando = '''SELECT nickname,password FROM users  WHERE nickname=? AND password=?''',(nickname,password)
-            #cursor.execute(comando)
-            #resultado=cursor.fetchall()
-            #if resultado:
-                #window3.destroy()
-                #menujogos()
-             #else:
-                #semsucesso.config(text='User ou Password nao correspondem')
-            #criadosucesso.config(text='Conta criada com Sucesso. Clique em login para iniciar sessão')
+        if (a!=0) and (b!=0):
+            try:
+                cursor = conexao_sql()
+                comando = "SELECT nickname,password FROM users  WHERE nickname=? AND password=?",(nickname.get(),password.get())
+                cursor.execute(comando)
+                resultado=cursor.fetchall()
+                window3.destroy()
+                menujogos()
+            except:
+                semsucesso.config(text='User ou Password nao correspondem')
+
     tk.Button(window3, text="login", font=("", 15), command=Consultar_BD).place(x=20, y=400)
     tk.Button(window3, text="criar conta", font=("", 15), command=criarconta2).place(x=90, y=400)
     window3.mainloop()

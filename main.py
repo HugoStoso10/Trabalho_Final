@@ -167,7 +167,7 @@ def ecra2():
             erropass.config(text="A palavra-passe não foi inserida")
         else:
             erropass.config(text="")
-
+        #código que verifica se existe o username e a password
         if (a != 0) and (b != 0):
             var1 = (nickname.get())
             var2 = (password.get())

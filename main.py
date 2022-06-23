@@ -168,15 +168,17 @@ def ecra2():
         else:
             erropass.config(text="")
 
-        if (a!=0) and (b!=0):
-            try:
-                cursor = conexao_sql()
-                comando = "SELECT nickname,password FROM users  WHERE nickname=? AND password=?",(nickname.get(),password.get())
-                cursor.execute(comando)
-                resultado=cursor.fetchall()
+        if (a != 0) and (b != 0):
+            var1 = (nickname.get())
+            var2 = (password.get())
+            cursor = conexao_sql()
+            comando = """EXEC logins @nickname=?, @password=?"""
+            cursor.execute(comando, var1, var2)
+            resultado = cursor.fetchall()
+            if resultado:
                 window3.destroy()
                 menujogos()
-            except:
+            else:
                 semsucesso.config(text='User ou Password nao correspondem')
 
     tk.Button(window3, text="login", font=("", 15), command=Consultar_BD).place(x=20, y=400)

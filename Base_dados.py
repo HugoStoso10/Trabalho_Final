@@ -1,4 +1,4 @@
-import pyodbc
+import pyodbc #pip install pyodbc
 
 #Funçao de conexao
 def conexao_sql():

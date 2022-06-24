@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkcalendar import DateEntry #pip install tkcalendar <- para instalar a biblioteca
+from tkcalendar import DateEntry #pip install tkcalendar
 from Base_dados import conexao_sql
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image #pip install pillow
 
 #------------------------------JANELA REGISTER------------------------------------------------------
 #Janela de register
@@ -55,7 +55,7 @@ def register(): #variaveis das Entrys: nome, apelido, nickname, email, data, pas
     tk.Label(window2, text="Confirme:", font=("", 15), bg="white").place(x=1030, y=300)
     confirmpass = tk.Entry(window2, width=25, show="*", textvariable=confirm)
     confirmpass.place(x=1119, y=306)
-    passconferro = tk.Label(window2, text="", font=("", 9), fg="red", bg="white")
+    passconferro = tk.Label(window2, text="", font=("", 8), fg="red", bg="white")
     passconferro.place(x=1030, y=330)
     a = tk.IntVar(value=0)
     #Função do checkbutton mostrarpass
